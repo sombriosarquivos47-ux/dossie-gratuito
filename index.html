@@ -164,13 +164,26 @@ ACESSAR DOSSIÊ 13 (RESTRITO)
 </div>
 
 <script>
-document.getElementById("accessForm").addEventListener("submit", function(e){
-    e.preventDefault();
+document.getElementById('accessForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-    document.getElementById("form-section").style.display = "none";
-    document.getElementById("thank-you-section").style.display = "block";
+    var nome = document.getElementById('nome').value;
+    var email = document.getElementById('email').value;
+
+    fetch("https://docs.google.com/spreadsheets/d/18fABAXU-QIuqwP0ELFRcKZQlfN0-eCDxdbe_YZ5_8Io/edit?usp=sharing", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}`
+    }).then(() => {
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('thank-you-section').style.display = 'block';
+    });
 });
 </script>
 
 </body>
+
 </html>
