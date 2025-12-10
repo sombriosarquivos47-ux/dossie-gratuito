@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Acesso Restrito</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    background: radial-gradient(circle at top, #0b0b0f, #000);
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: rgba(10,10,15,0.95);
+    border: 1px solid #2c2c2c;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 0 25px rgba(0,0,0,0.9);
+    text-align: center;
+}
+
+h2 {
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: #f2f2f2;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #bdbdbd;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #aaa;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    background: #0f0f15;
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: #eee;
+}
+
+input:focus {
+    outline: none;
+    border-color: #8e0000;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: linear-gradient(135deg, #8e0000, #3a0000);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    filter: brightness(1.2);
+}
+
+#thank-you-section {
+    display: none;
+}
+
+.alert-text {
+    border-left: 3px solid #8e0000;
+    padding-left: 15px;
+    margin: 25px 0;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.btn-primary {
+    display: block;
+    background: linear-gradient(135deg, #8e0000, #3a0000);
+    padding: 14px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 10px 18px;
+    border: 1px solid #8e0000;
+    color: #8e0000;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="form-section">
+<h2>ACESSO RESTRITO</h2>
+<p>Alguns arquivos não deveriam circular.  
+Se chegou até aqui, já foi marcado.</p>
+
+<form id="accessForm">
+<div class="form-group">
+<label>Nome</label>
+<input type="text" id="nome" required>
+</div>
+
+<div class="form-group">
+<label>E-mail</label>
+<input type="email" id="email" required>
+</div>
+
+<button type="submit" class="submit-btn">LIBERAR ARQUIVO</button>
+</form>
+</div>
+
+<div id="thank-you-section">
+<h2>ACESSO CONFIRMADO</h2>
+
+<p class="alert-text">
+Você acaba de atravessar um limite que a maioria nunca verá.  
+O que você vai ler agora nunca esteve nos lugares óbvios.
+</p>
+
+<a href="https://drive.google.com/file/d/1l04MqCnxGtei5xpyBXnfx0VtkYvULZHZ/view?usp=drive_link" class="btn-primary" target="_blank">
+BAIXAR DOSSIÊ GRATUITO
+</a>
+
+<a href="https://pay.hotmart.com/L103338336R?checkoutMode=10" class="btn-secondary" target="_blank">
+ACESSAR DOSSIÊ 13 (RESTRITO)
+</a>
+</div>
+
+</div>
+
+<script>
+document.getElementById('accessForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var nome = document.getElementById('nome').value;
+    var email = document.getElementById('email').value;
+
+    fetch("https://script.google.com/macros/s/AKfycbx0ClqeJ-XAx0KCoLmSrAB_NlFMcuxtop4Fw254_XxlZJZuGF4A3TIPf9qpHw8L1p28/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}`
+    }).then(() => {
+        document.getElementById('form-section').style.display = 'none';
+        document.getElementById('thank-you-section').style.display = 'block';
+    });
+});
+</script>
+
+</body>
+</html>
