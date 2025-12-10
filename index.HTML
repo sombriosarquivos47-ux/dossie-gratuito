@@ -170,16 +170,20 @@ document.getElementById('accessForm').addEventListener('submit', function(event)
     var nome = document.getElementById('nome').value;
     var email = document.getElementById('email').value;
 
+    var dados = new URLSearchParams();
+    dados.append("nome", nome);
+    dados.append("email", email);
+
     fetch("https://script.google.com/macros/s/AKfycbx0ClqeJ-XAx0KCoLmSrAB_NlFMcuxtop4Fw254_XxlZJZuGF4A3TIPf9qpHw8L1p28/exec", {
         method: "POST",
-        mode: "no-cors",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: `nome=${encodeURIComponent(nome)}&email=${encodeURIComponent(email)}`
-    }).then(() => {
+        body: dados
+    })
+    .then(() => {
         document.getElementById('form-section').style.display = 'none';
         document.getElementById('thank-you-section').style.display = 'block';
+    })
+    .catch(() => {
+        alert("Erro ao registrar. Tente novamente.");
     });
 });
 </script>
